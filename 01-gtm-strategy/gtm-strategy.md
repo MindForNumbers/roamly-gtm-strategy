@@ -38,6 +38,7 @@ _Why is this the right motion for this audience and price point?_
 
 ## 4. V1 one-pager
 
+[Roamly_GTM_Strategy_OnePager.pdf](https://github.com/user-attachments/files/32409318/Roamly_GTM_Strategy_OnePager.pdf)
 _The single-sentence GTM thesis for Roamly Groups._
 
 > _For [ICP] who [need], Roamly Groups is a [category] that [key benefit]. Unlike [alternative], we [differentiator]._
