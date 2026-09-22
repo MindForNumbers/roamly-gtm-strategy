@@ -39,8 +39,8 @@ Time-to-value must be measured in minutes and the sales cycle must be entirely s
 - **Monetization:** Transactional take-rate on the booked inventory (seats secured).
 
 ## 4. V1 one-pager
+[Roamly Groups_ V1 Go-To-Market Strategy.pdf](https://github.com/user-attachments/files/32496896/Roamly.Groups_.V1.Go-To-Market.Strategy.pdf)
 
-[Roamly_GTM_Strategy_OnePager.pdf](https://github.com/user-attachments/files/32409318/Roamly_GTM_Strategy_OnePager.pdf)
 _The single-sentence GTM thesis for Roamly Groups._
 
 > For Milestone Trip Organizers who need to coordinate multi-player travel, Roamly Groups is a native split-payment and shared itinerary planning engine that locks in group availability instantly without forcing one person to front the bill or manage a massive spreadsheet. Unlike the manual Venmo/WhatsApp status quo, we offer premium, culturally vetted local experiences with a frictionless group checkout and a centralized collaborative hub.
