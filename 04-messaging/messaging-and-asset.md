@@ -60,7 +60,7 @@
 
 *   **Asset type:** Social Media Split-Screen Graphic (For Surface 3)
 *   **Prompt used:** *(Combined 3-part prompt)* "1. Left Side: Desaturated photo of a young professional looking stressed staring at a laptop displaying a complex spreadsheet, holding a smartphone with Venmo notifications. 2. Right Side: Vibrant sunlit POV photo holding a smartphone, looking out at a group of 10 friends celebrating on a luxury boat. 3. UI Overlay: Clean mobile dashboard widget reading 'Verified Host: Ideal for 10+' and a green progress bar 'Booking Confirmed: 10/10 Paid'."
-*   **Output:** ![Roamly Social Asset](watermarked_img_13448136841303777796.jpg)
+*   **Output:** ![Uploading Roamly_Gemini.png…]()
 *   **What you edited and why:** The initial Surface 3 copy relied entirely on the emotional Value Prop (relief from being the bank). I edited the visual asset concept to physically embed the *Capabilities* and *Evidence* directly into the image via a UI overlay (the "Verified Host" badge and the "10/10 Paid" dashboard tracker). This proves *how* the relief is achieved without cluttering the social media hook with technical jargon.
 
 ## 6. Blind-read result
