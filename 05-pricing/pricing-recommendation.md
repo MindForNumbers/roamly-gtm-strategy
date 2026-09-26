@@ -63,5 +63,5 @@ For each stakeholder, what they most need to hear:
 - **Why:** The raw output defaulted to generic software feature lists. These adjustments translate platform mechanics into executive commercial arguments that justify ungating the software, preserve the viral PLG acquisition loop, and prove why empirical research is required before finalizing checkout take-rates.
 
 ## Link to full artifact
+[Roamly Groups V1 Pricing & Packaging Strategy.pdf](https://github.com/user-attachments/files/32686827/Roamly.Groups.V1.Pricing.Packaging.Strategy.pdf)
 
-[link to your Pricing Builder export / one-pager]
