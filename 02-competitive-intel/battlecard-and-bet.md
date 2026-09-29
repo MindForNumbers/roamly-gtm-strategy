@@ -41,4 +41,4 @@ _The signals (data, quotes, trends) that back the bet._
 
 ## Link to full artifact
 
-_[link to your Battlecard Builder export / slide]_
+[View Battlecard Builder](https://htmlpreview.github.io/?https://github.com/MindForNumbers/roamly-gtm-strategy/blob/main/06-launch/final-gtm-presentation.html)
