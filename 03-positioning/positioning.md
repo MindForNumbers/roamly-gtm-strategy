@@ -47,4 +47,4 @@ For **Milestone Trip Organizers** who **need to coordinate multi-player travel**
 
 ## Link to full artifact
 
-[link to your Positioning Builder export / slide]
+[View Positioning Builder](https://htmlpreview.github.io/?https://github.com/MindForNumbers/roamly-gtm-strategy/blob/main/06-launch/final-gtm-presentation.html)
