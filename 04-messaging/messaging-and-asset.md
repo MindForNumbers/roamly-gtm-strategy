@@ -75,4 +75,4 @@
 
 ## Link to full artifact
 
-[link to your Messaging Builder export / slide]
+[View Messaging Builder](https://htmlpreview.github.io/?https://github.com/MindForNumbers/roamly-gtm-strategy/blob/main/06-launch/final-gtm-presentation.html)
