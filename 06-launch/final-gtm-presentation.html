@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>R.J. Rimando · Roamly Groups GTM Deck</title>
+  <style>
+    :root {
+      --bg: #07162C;
+      --card-bg: rgba(255, 255, 255, 0.04);
+      --card-border: rgba(255, 255, 255, 0.1);
+      --text: #ffffff;
+      --text-muted: #94a3b8;
+      --accent: #3b82f6;
+      --accent-glow: rgba(59, 130, 246, 0.15);
+      --success: #10b981;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg);
+      color: var(--text);
+    }
+
+    body {
+      overflow-y: scroll;
+      scroll-snap-type: y mandatory;
+      height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Top Progress Bar */
+    #progress-container {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: transparent;
+      z-index: 100;
+    }
+
+    #progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.2s ease-out;
+    }
+
+    /* Right Nav Dots */
+    #nav-dots {
+      position: fixed;
+      right: 2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+      z-index: 90;
+    }
+
+    .dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.2);
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .dot.active, .dot:hover {
+      background: var(--accent);
+      transform: scale(1.3);
+    }
+
+    /* Slide Setup */
+    section {
+      min-height: 100vh;
+      scroll-snap-align: start;
+      padding: 4rem 6rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      position: relative;
+    }
+
+    .content-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      width: 100%;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+
+    section.visible .content-container {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Typography */
+    h1 {
+      font-size: 3rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      margin-bottom: 0.5rem;
+    }
+
+    h2 {
+      font-size: 2rem;
+      font-weight: 600;
+      letter-spacing: -0.01em;
+      margin-bottom: 0.5rem;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    p, li {
+      color: var(--text);
+      font-size: 0.95rem;
+    }
+
+    ul {
+      list-style-type: none;
+    }
+
+    li {
+      position: relative;
+      padding-left: 1.25rem;
+      margin-bottom: 0.4rem;
+    }
+
+    li::before {
+      content: "•";
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-weight: bold;
+    }
+
+    /* UI Cards & Layouts */
+    .grid {
+      display: grid;
+      gap: 1.25rem;
+    }
+
+    .grid-2 { grid-template-columns: repeat(2, 1fr); }
+    .grid-3 { grid-template-columns: repeat(3, 1fr); }
+    .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+    .card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 1.25rem;
+      position: relative;
+    }
+
+    .card.highlight {
+      border-left: 4px solid var(--accent);
+    }
+
+    /* Pill Tags */
+    .pill {
+      display: inline-block;
+      padding: 0.25rem 0.75rem;
+      background: rgba(59, 130, 246, 0.15);
+      border: 1px solid rgba(59, 130, 246, 0.4);
+      color: #93c5fd;
+      border-radius: 9999px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin-bottom: 0.5rem;
+    }
+
+    .pill-green {
+      background: rgba(16, 185, 129, 0.15);
+      border-color: rgba(16, 185, 129, 0.4);
+      color: #6ee7b7;
+    }
+
+    /* Tables */
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 6px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 0.75rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--card-border);
+      vertical-align: top;
+    }
+
+    th {
+      background: rgba(255, 255, 255, 0.05);
+      font-weight: 600;
+      color: var(--accent);
+      text-transform: uppercase;
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+    }
+
+    tr:last-child td {
+      border-bottom: none;
+    }
+
+    /* Links & Downloads */
+    a.doc-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #93c5fd;
+      text-decoration: none;
+      font-size: 0.85rem;
+      margin-top: 0.5rem;
+      padding: 0.4rem 0.8rem;
+      background: rgba(59, 130, 246, 0.1);
+      border: 1px solid rgba(59, 130, 246, 0.3);
+      border-radius: 4px;
+      transition: background 0.2s;
+    }
+
+    a.doc-link:hover {
+      background: rgba(59, 130, 246, 0.2);
+    }
+
+    /* Responsive Adjustments */
+    @media (max-width: 1024px) {
+      section { padding: 3rem 2rem; }
+      .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+      #nav-dots { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <div id="progress-container"><div id="progress-bar"></div></div>
+
+  <nav id="nav-dots">
+    <div class="dot active" onclick="scrollToSlide(0)"></div>
+    <div class="dot" onclick="scrollToSlide(1)"></div>
+    <div class="dot" onclick="scrollToSlide(2)"></div>
+    <div class="dot" onclick="scrollToSlide(3)"></div>
+    <div class="dot" onclick="scrollToSlide(4)"></div>
+    <div class="dot" onclick="scrollToSlide(5)"></div>
+    <div class="dot" onclick="scrollToSlide(6)"></div>
+    <div class="dot" onclick="scrollToSlide(7)"></div>
+  </nav>
+
+  <!-- SLIDE 1: Title -->
+  <section id="slide-1">
+    <div class="content-container" style="text-align: center;">
+      <span class="pill">Final GTM Defense</span>
+      <h1 style="font-size: 3.5rem; margin-top: 1rem;">Roamly Groups</h1>
+      <p style="font-size: 1.5rem; color: var(--accent); margin-bottom: 2rem;">Decentralized Split-Payments & Shared Itinerary Planning Engine</p>
+      <div style="display: inline-flex; flex-direction: column; gap: 0.25rem; font-size: 1rem; color: var(--text-muted);">
+        <strong>R.J. Rimando · Go-To-Market Final Project</strong>
+        <span>September 26, 2026</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 2: GTM Strategy -->
+  <section id="slide-2">
+    <div class="content-container">
+      <h2>01 · GTM Strategy & Engine</h2>
+      <div class="grid grid-2" style="margin-top: 1rem;">
+        <div class="card highlight">
+          <span class="pill">Core GTM Motion</span>
+          <h3>Pure Product-Led Growth (PLG)</h3>
+          <ul>
+            <li><strong>Acquisition:</strong> Organizer distributes split-payment & itinerary link, acquiring Invitees at near-zero CAC.</li>
+            <li><strong>Activation:</strong> Invitees onboard by paying their exact share within a 24-hr hold window to unlock the collaborative hub.</li>
+            <li><strong>Monetization:</strong> Transactional take-rate captured on completed inventory bookings.</li>
+            <li><strong>Self-Serve Velocity:</strong> Low-to-mid ACV requires pure self-serve execution measured in minutes.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="pill">Target Segment & ICP</span>
+          <h3>The Milestone Trip Organizer</h3>
+          <ul>
+            <li><strong>Profile:</strong> Friend-group ringleader coordinating 30th/40th birthdays, bachelor/ettes, or reunions.</li>
+            <li><strong>Acute Problem:</strong> Financial exposure of fronting thousands on personal cards, chasing Venmo payments, and handling messy group chat plans.</li>
+            <li><strong>Current Workaround:</strong> Fragmented stack of Google Sheets + WhatsApp + Splitwise + personal credit cards.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="grid grid-3" style="margin-top: 1rem;">
+        <div class="card">
+          <h3>The Discover Framework</h3>
+          <p style="font-size: 0.85rem;"><strong>Demand:</strong> High pull via manual split requests & cart drops.<br><strong>Offer:</strong> Zero-risk hold + shared planning.<br><strong>Validation:</strong> Drop-off spike on 4+ ticket carts ($1.5k+).</p>
+        </div>
+        <div class="card">
+          <h3>Success Metrics</h3>
+          <p style="font-size: 0.85rem;"><strong>North Star:</strong> Group Cart Completion Rate (stops checkout bleeding).<br><strong>Leading Indicator:</strong> Invitee Capture Rate (K-Factor viral coefficient).</p>
+        </div>
+        <div class="card">
+          <h3>Core Vulnerability</h3>
+          <p style="font-size: 0.85rem;"><strong>Assumption:</strong> 12k hosts can handle large groups.<br><strong>Mitigation:</strong> Pre-launch sprint to tag inventory as "Verified for 10+" before exposure.</p>
+          <a class="doc-link" href="https://github.com/user-attachments/files/32496896/Roamly.Groups_.V1.Go-To-Market.Strategy.pdf" target="_blank">📄 View Module 1 Artifact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 3: Competitive Intelligence & Strategic Bet -->
+  <section id="slide-3">
+    <div class="content-container">
+      <h2>02 · Competitive Intelligence & Strategic Bet</h2>
+      <div class="grid grid-2" style="margin-top: 1rem;">
+        <div class="card">
+          <span class="pill">Competitive Battlecard</span>
+          <table>
+            <thead>
+              <tr><th>Alternative</th><th>Weakness</th><th>How We Win</th></tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Status Quo</strong><br>(Sheets/Venmo)</td>
+                <td>100% financial risk on Organizer; fragmented planning</td>
+                <td><strong>Zero-Risk Checkout:</strong> Split at POS; zero credit card exposure</td>
+              </tr>
+              <tr>
+                <td><strong>Tour Operators</strong></td>
+                <td>Rigid, high markup, outdated non-collaborative UI</td>
+                <td><strong>Self-Serve Hub:</strong> Transparent control & local vetting</td>
+              </tr>
+              <tr>
+                <td><strong>Splitwise</strong></td>
+                <td>Solves math retroactively; zero booking integration</td>
+                <td><strong>Inventory Hook:</strong> Settle payment & lock inventory in one flow</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="card highlight">
+          <span class="pill">The Strategic Bet</span>
+          <h3>Bottom-of-Funnel Conversion</h3>
+          <ul>
+            <li><strong>Macro Tailwinds:</strong> Tightening consumer credit makes users reject large personal balances while milestone group travel demand surges.</li>
+            <li><strong>Deliberate Omission:</strong> NOT building an inspiration board or social network; hyper-focused on eliminating checkout drop-off.</li>
+            <li><strong>90-Day Validation Goal:</strong> >20% increase in cart completion for 4+ tickets compared to historical single-payer baseline.</li>
+            <li><strong>Trap to Plant:</strong> <em>"If someone drops out or pays late, who is stuck holding the bag on your personal credit card?"</em></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 4: Positioning -->
+  <section id="slide-4">
+    <div class="content-container">
+      <h2>03 · Product Positioning Framework</h2>
+      <div class="card highlight" style="margin-top: 1rem; border-left: 4px solid var(--accent); background: var(--accent-glow);">
+        <span class="pill">The Final Positioning Statement</span>
+        <p style="font-size: 1.1rem; line-height: 1.6;">
+          For <strong>Milestone Trip Organizers</strong> who <strong>need to coordinate multi-player travel</strong>, Roamly Groups is the <strong>native split-payment and shared itinerary planning engine</strong> that <strong>locks in group availability instantly without forcing one person to front the bill or manage a massive spreadsheet</strong>. Unlike <strong>the manual Venmo/WhatsApp status quo</strong>, Roamly Groups <strong>offers premium, culturally vetted local experiences with a frictionless group checkout and a centralized collaborative hub</strong>.
+        </p>
+      </div>
+      <div class="grid grid-3" style="margin-top: 1rem;">
+        <div class="card">
+          <span class="pill">Core Truth</span>
+          <p style="font-size: 0.85rem;">We control both vetted supply (12k hosts) and financial checkout plumbing. Competitors manage math without inventory (Splitwise) or have inventory with single-payer friction (Airbnb).</p>
+        </div>
+        <div class="card">
+          <span class="pill">Pressure Test</span>
+          <p style="font-size: 0.85rem;"><strong>Ownable:</strong> OTAs cannot match without rewriting payment architecture.<br><strong>Believable:</strong> Powered by existing 12k vetted hosts.<br><strong>Durable:</strong> Holds if capacity tagging is enforced.</p>
+        </div>
+        <div class="card">
+          <span class="pill">The One-Liner</span>
+          <p style="font-size: 0.85rem; font-weight: 600; color: #93c5fd;">"Book the perfect group trip without playing bank for your friends."</p>
+          <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.5rem;">[link to your Positioning Builder export / slide]</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 5: Messaging -->
+  <section id="slide-5">
+    <div class="content-container">
+      <h2>04 · Audience Messaging & Assets</h2>
+      <div class="grid grid-3" style="margin-top: 1rem;">
+        <div class="card">
+          <span class="pill">1. The Organizer</span>
+          <h3>Value Prop</h3>
+          <p style="font-size: 0.85rem;">Be a traveler, not an unpaid bank or nagging camp counselor.</p>
+          <h3 style="margin-top: 0.5rem;">Capabilities</h3>
+          <p style="font-size: 0.85rem;">Zero-charge holds, native split links, centralized itinerary hub.</p>
+          <h3 style="margin-top: 0.5rem;">Evidence</h3>
+          <p style="font-size: 0.85rem;">12k capacity-tagged hosts; solves single-payer cart drop-off.</p>
+        </div>
+        <div class="card">
+          <span class="pill">2. The Invitee</span>
+          <h3>Value Prop</h3>
+          <p style="font-size: 0.85rem;">Pay your fair share in 30s and access trip plans without app bloat.</p>
+          <h3 style="margin-top: 0.5rem;">Capabilities</h3>
+          <p style="font-size: 0.85rem;">Instant browser checkout link acting as a viral product preview.</p>
+          <h3 style="margin-top: 0.5rem;">Evidence</h3>
+          <p style="font-size: 0.85rem;">Eliminates awkward Venmo reminders and chaotic text threads.</p>
+        </div>
+        <div class="card">
+          <span class="pill">3. The Host</span>
+          <h3>Value Prop</h3>
+          <p style="font-size: 0.85rem;">Maximize timeslot revenue without risk of flakes or overcapacity.</p>
+          <h3 style="margin-top: 0.5rem;">Capabilities</h3>
+          <p style="font-size: 0.85rem;">Upfront capacity guarantees; automated multi-payer settlement.</p>
+          <h3 style="margin-top: 0.5rem;">Evidence</h3>
+          <p style="font-size: 0.85rem;">Explicit "Verified for 10+" labeling across 40 cities.</p>
+        </div>
+      </div>
+      <div class="card highlight" style="margin-top: 1rem;">
+        <div class="grid grid-2" style="align-items: center;">
+          <div>
+            <span class="pill">AI Copy Asset Refinement</span>
+            <h3>Social Split-Screen Hook (TikTok/Reels)</h3>
+            <p style="font-size: 0.85rem; margin-bottom: 0.5rem;"><em>"POV: You secured a private boat for 10 without fronting cash or making a spreadsheet."</em></p>
+            <ul>
+              <li><strong>Refinement:</strong> Embedded UI dashboard overlay ("Verified Host: 10+" & "10/10 Paid") directly into the creative.</li>
+              <li><strong>Why:</strong> Proves <em>how</em> relief happens visually without cluttering the hook with technical copy.</li>
+            </ul>
+          </div>
+          <div style="text-align: right;">
+            <a class="doc-link" href="https://github.com/user-attachments/assets/70d91a1d-7bbc-45de-9f06-62b9a51cddef" target="_blank">🖼 View Creative Asset Output</a>
+            <p style="font-size: 0.75rem; color: var(--text-muted); margin-top: 0.4rem;">[link to your Messaging Builder export / slide]</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 6: Pricing Recommendation -->
+  <section id="slide-6">
+    <div class="content-container">
+      <h2>05 · Pricing & Packaging Recommendation</h2>
+      <div class="grid grid-2" style="margin-top: 0.75rem;">
+        <div class="card highlight">
+          <span class="pill">Model & Goal</span>
+          <h3>Transaction-Based Model</h3>
+          <ul>
+            <li><strong>Commercial Goal:</strong> Maximize revenue from a known audience by recovering stranded multi-ticket cart GMV.</li>
+            <li><strong>Flexible Payment:</strong> Fractional split across individual links OR single-payer cover-all option.</li>
+            <li><strong>V1 Free Packaging:</strong> Group tools 100% free to maximize checkout completion and PLG invitee loops.</li>
+          </ul>
+        </div>
+        <div class="card">
+          <span class="pill">Research Validation</span>
+          <h3>Van Westendorp Price Sensitivity</h3>
+          <ul>
+            <li><strong>Study Target:</strong> Survey historical multi-ticket cart abandoners across 4 pricing perception questions.</li>
+            <li><strong>Assumption to Validate:</strong> The exact acceptable transaction fee % before Invitees deem it "too expensive."</li>
+            <li><strong>Fatal Risk:</strong> Invitee fee sensitivity. If the fee is too high, invitees revert to Venmo, cart drops below 100%, and the booking dies.</li>
+          </ul>
+        </div>
+      </div>
+      <div class="card" style="margin-top: 0.75rem;">
+        <span class="pill">Packaging Structure (By Features)</span>
+        <table>
+          <thead>
+            <tr><th>Tier</th><th>Target</th><th>Price</th><th>Includes</th></tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Standard</strong></td>
+              <td>1–3 tickets</td>
+              <td>Standard Fee</td>
+              <td>Single-card checkout, self-managed plans</td>
+            </tr>
+            <tr style="background: rgba(59, 130, 246, 0.08);">
+              <td><strong>Roamly Groups ★</strong></td>
+              <td>4+ tickets (Target)</td>
+              <td>Free Toolset (Take-Rate)</td>
+              <td>Split-pay links, tracking dashboard, shared itinerary hub</td>
+            </tr>
+            <tr>
+              <td><strong>Concierge (V2)</strong></td>
+              <td>High-budget/Offsites</td>
+              <td>Retainer + Take-Rate</td>
+              <td>Dedicated local expert custom-curates multi-day itinerary</td>
+            </tr>
+          </tbody>
+        </table>
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem;">
+          <p style="font-size: 0.8rem; color: var(--text-muted);">Executive Stakeholder Memo completed for CFO, CMO, and CPO alignment.</p>
+          <a class="doc-link" href="https://github.com/user-attachments/files/32686827/Roamly.Groups.V1.Pricing.Packaging.Strategy.pdf" target="_blank">📄 View Module 5 Artifact</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 7: Individual Insights -->
+  <section id="slide-7">
+    <div class="content-container">
+      <h2>06 · Individual Insights & Synthesis</h2>
+      <div class="grid grid-3" style="margin-top: 1.5rem;">
+        <div class="card highlight">
+          <span class="pill">Friction Points</span>
+          <h3>Monetization vs. Growth</h3>
+          <p style="font-size: 0.9rem; line-height: 1.6;">
+            Deciding whether to monetize software capabilities was the hardest challenge. Leaning toward a SaaS fee broke the PLG viral loop.
+          </p>
+          <p style="font-size: 0.9rem; line-height: 1.6; margin-top: 0.5rem; color: #93c5fd;">
+            <strong>Solution:</strong> Treated Groups as an unblocking mechanism—keeping the toolset free captures high-basket GMV while preserving invitee account acquisition.
+          </p>
+        </div>
+        <div class="card highlight">
+          <span class="pill">The "Aha" Moment</span>
+          <h3>The Invitee Engine</h3>
+          <p style="font-size: 0.9rem; line-height: 1.6;">
+            The Invitee is not just a participant settling a bill—they are the <strong>primary customer acquisition engine</strong>.
+          </p>
+          <p style="font-size: 0.9rem; line-height: 1.6; margin-top: 0.5rem; color: #93c5fd;">
+            <strong>Realization:</strong> The invitee checkout is a zero-CAC Trojan Horse. Any pricing or UX friction placed on the invitee kills the viral loop before activation.
+          </p>
+        </div>
+        <div class="card highlight">
+          <span class="pill">Key Takeaways</span>
+          <h3>Strategic Principles</h3>
+          <ul>
+            <li><strong>Value Alignment:</strong> Monetize when value is experienced (completed bookings), not arbitrarily.</li>
+            <li><strong>Ungated Virality:</strong> Packaging by features only scales if viral hooks remain completely accessible.</li>
+            <li><strong>Empirical Pricing:</strong> Van Westendorp research prevents killing conversion at checkout.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SLIDE 8: Closing -->
+  <section id="slide-8">
+    <div class="content-container" style="text-align: center;">
+      <span class="pill pill-green">GTM Summary</span>
+      <h2 style="font-size: 2.25rem; justify-content: center; margin-top: 1rem; max-width: 900px; margin-left: auto; margin-right: auto;">
+        Roamly Groups turns group travel coordination from an administrative failure point into a viral acquisition and high-margin revenue engine.
+      </h2>
+      <div style="margin-top: 3rem;">
+        <h1 style="font-size: 3rem; color: var(--accent);">Thank You</h1>
+        <p style="font-size: 1.1rem; color: var(--text-muted); margin-top: 0.5rem;">Q&A · R.J. Rimando</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    const sections = document.querySelectorAll('section');
+    const dots = document.querySelectorAll('.dot');
+    const progressBar = document.getElementById('progress-bar');
+    let currentIndex = 0;
+
+    // Intersection Observer for Slide Animations & Active States
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          const id = entry.target.getAttribute('id');
+          currentIndex = Array.from(sections).indexOf(entry.target);
+          updateNav();
+        }
+      });
+    }, { threshold: 0.5 });
+
+    sections.forEach(section => observer.observe(section));
+
+    function updateNav() {
+      dots.forEach((dot, index) => {
+        dot.classList.toggle('active', index === currentIndex);
+      });
+      const progress = (currentIndex / (sections.length - 1)) * 100;
+      progressBar.style.width = `${progress}%`;
+    }
+
+    function scrollToSlide(index) {
+      if (index >= 0 && index < sections.length) {
+        sections[index].scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    // Keyboard Arrow Navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowDown' || e.key === 'ArrowRight' || e.key === 'PageDown') {
+        e.preventDefault();
+        scrollToSlide(currentIndex + 1);
+      } else if (e.key === 'ArrowUp' || e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        e.preventDefault();
+        scrollToSlide(currentIndex - 1);
+      }
+    });
+  </script>
+</body>
+</html>
