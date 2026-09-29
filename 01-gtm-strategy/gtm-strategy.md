@@ -61,4 +61,4 @@ _Pick the one assumption that, if wrong, breaks the strategy — and how you'd t
 **How to test it:** Before launch, run an operational sprint to categorize and explicitly label our existing supply base for capacity limits and occasion suitability (e.g., "Verified for 10+"). Only expose group-verified hosts to the Roamly Groups booking flow.
 
 ## Link to full artifact
-https://htmlpreview.github.io/?https://github.com/MindForNumbers/roamly-gtm-strategy/blob/main/06-launch/final-gtm-presentation.html
+[View GTM Strategy](https://htmlpreview.github.io/?https://github.com/MindForNumbers/roamly-gtm-strategy/blob/main/06-launch/final-gtm-presentation.html)
